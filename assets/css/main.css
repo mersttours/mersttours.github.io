@@ -3565,10 +3565,7 @@ input, select, textarea {
 
 /* Banner */
 #banner {
-  background-image: url('images/banner1.png'); /* Replace with your image path */
-  background-size: cover; /* Ensures the image covers the section */
-  background-position: center; /* Centers the image */
-  background-repeat: no-repeat; /* Prevents repeating the image */
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -3576,6 +3573,34 @@ input, select, textarea {
   cursor: default;
   height: 100vh; /* Full-screen height */
   min-height: 35em;
+  overflow: hidden;
+}
+
+.slideshow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.slideshow-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slideshow-image.active {
+  opacity: 1;
+}
   overflow: hidden;
   position: relative; /* Maintains stacking context for overlay */
   text-align: center;
@@ -3903,15 +3928,45 @@ input, select, textarea {
 /* Landing */
 
 	body.landing #page-wrapper {
-		background-image: -moz-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-		background-image: -ms-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-		background-image: linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/banner.jpg");
-		background-attachment: fixed;
+		padding-top: 0;
+}
+
+.banner-slideshow {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+}
+
+.banner-slide {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		transition: opacity 1s ease-in-out;
 		background-position: center center;
 		background-repeat: no-repeat;
 		background-size: cover;
-		padding-top: 0;
+		background-attachment: fixed;
+}
+
+.banner-slide:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+}
+
+.banner-slide.active {
+		opacity: 1;
+}
 	}
 
 	body.landing #footer {
